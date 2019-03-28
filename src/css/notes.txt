@@ -1,0 +1,5 @@
+At this current point in time I'm trying to decide if I should use Emotion or Styled-Components.
+Or neither. Since this is a practice/portfolio project, I'd like to try new things. 
+
+For now I'm going to place CSS in this folder. While possibly moving it into the JS later.
+(Yes, I know this is a controversal topic)
