@@ -28,10 +28,11 @@ const App = () => {
   const [userMovies, setUserMovies] = useState([]);
 
   return (
-    <div className="outer-container">
+    <>
       <Header />
+      <div />
       <Footer />
-    </div>
+    </>
   );
 };
 
