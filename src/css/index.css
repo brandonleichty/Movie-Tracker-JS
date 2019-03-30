@@ -19,7 +19,6 @@ body {
 
 .outer-container {
   display: grid;
-  place-items: center center;
   grid-template-columns: 1fr;
   grid-template-rows: 450px 1fr 80px;
   grid-template-areas:
@@ -61,6 +60,10 @@ footer {
   grid-area: footer;
   color: #a9a9a9;
   font-size: 0.8rem;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  justify-content: center;
 }
 
 .site-hero-logo {
@@ -77,4 +80,59 @@ footer {
   font-family: "Bitter", serif;
   font-size: calc(10px + 2vmin);
   font-weight: 700;
+}
+
+.movie-grid-container {
+  display: grid;
+  padding-left: 10%;
+  padding-right: 10%;
+  place-items: center center;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-gap: 25px;
+  grid-area: main;
+}
+
+.movie-container {
+  display: grid;
+  place-items: center center;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  /* Maybe add a box shadow at some point? Can't decide! */
+  /* box-shadow: 10px 10px 120px 0px rgba(66,24,66,1); */
+}
+
+.movie-container img {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+@media (min-width: 1224px) {
+  .movie-grid-container {
+    padding-left: 20%;
+    padding-right: 20%;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+.add-button {
+  height: 50px;
+  width: 100%;
+  /* background-color: #2c7695; */
+  background: linear-gradient(135deg, #5ee7df, #43a4ca);
+  transition: background 0.65s ease;
+  /* #F7C232 */
+  /* #50BFC3 */
+  /* #2c7695 */
+  display: grid;
+  place-items: center center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
 }
