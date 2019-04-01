@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import MovieGrid from "./Components/MovieGrid";
+import IntroPage from "./Components/IntroPage";
+import useHandleUserMovies from "./Hooks/handleUserMoviesHook";
 
 const App = () => {
   // Since this is a relatively small app, I'll be storing state required throughout the
@@ -23,14 +26,30 @@ const App = () => {
   // 5. I will be using emojis in my code comments. 🙌 I'm sorry if that offends anyone. 😜
 
   const [user, setUser] = useState(null);
-  const [welcomePage, setWelcomePage] = useState(true);
-  const [movieGrid, setMovieGrid] = useState([]);
-  const [userMovies, setUserMovies] = useState([]);
+  const [userMovies, addOrRemoveUserMovies] = useHandleUserMovies();
+  // const [movieType, setMovieType] = useState("popular");
+  const [navBarLocation, setNavBarLocation] = useState("popular");
+  const [query, setQuery] = useState("");
+  const [introPage, setIntroPage] = useState(true);
 
   return (
     <>
-      <Header />
-      <div />
+      <Header
+        setNavBarLocation={setNavBarLocation}
+        setQuery={setQuery}
+        introPage={introPage}
+      />
+      {introPage ? (
+        <IntroPage setIntroPage={setIntroPage} />
+      ) : (
+        <MovieGrid
+          movieType={navBarLocation}
+          query={query}
+          userMovies={userMovies}
+          addOrRemoveUserMovies={addOrRemoveUserMovies}
+        />
+      )}
+
       <Footer />
     </>
   );
