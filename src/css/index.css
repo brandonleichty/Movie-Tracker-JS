@@ -136,3 +136,42 @@ footer {
   border: none;
   cursor: pointer;
 }
+
+/* Intro Page CSS */
+
+.add-first-movie {
+  display: grid;
+  place-items: center center;
+}
+
+.first-movie-div {
+  border-radius: 10px;
+  background-color: #dddddd;
+  border: 6px dashed white;
+  width: 150px;
+  height: 250px;
+  display: grid;
+  place-items: center center;
+  align-content: center;
+  text-align: center;
+  font-family: "Bitter", serif;
+  cursor: pointer;
+}
+
+.add-first-movie img {
+  width: 30%;
+}
+
+/* END Intro Page CSS */
+
+/* Add-button CSS START */
+
+.add-button img {
+  color: #fff;
+  font-weight: bold;
+  height: 60%;
+}
+
+button {
+  outline: none;
+}
