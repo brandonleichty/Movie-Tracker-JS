@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { useTransition, animated } from "react-spring";
 
 import addIcon from "../Images/add.svg";
 import checkedIcon from "../Images/tick.svg";
 const POSTER_PATH = "http://image.tmdb.org/t/p/w500";
 
 const Movie = props => {
-  const { movie, userMovies, addOrRemoveUserMovies } = props;
+  const [show, set] = useState(false);
+  const transitions = useTransition(show, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  });
 
-  return (
-    <div className="movie-container">
+  const { movie, userMovies, setUserMovies, loginStatus, user } = props;
+
+  return transitions.map(({ item, key, props }) => (
+    <animated.div style={props} className="movie-container">
       <img src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
 
       <button
         className="add-button"
-        onClick={() => addOrRemoveUserMovies(movie)}
+        onClick={() => setUserMovies(movie, user, loginStatus)}
       >
         {userMovies.some(myMovie => myMovie["id"] === movie.id) ? (
           <img src={checkedIcon} alt="" />
@@ -21,8 +29,8 @@ const Movie = props => {
           <img src={addIcon} alt="" />
         )}
       </button>
-    </div>
-  );
+    </animated.div>
+  ));
 };
 
 export default Movie;
