@@ -5,6 +5,10 @@ import Footer from "./Components/Footer";
 import MovieGrid from "./Components/MovieGrid";
 import IntroPage from "./Components/IntroPage";
 import useHandleUserMovies from "./Hooks/handleUserMoviesHook";
+import EmailLogin from "./AuthComponents/EmailLogin";
+import EmailSignUp from "./AuthComponents/EmailSignUp";
+
+import firebase from "./firebase";
 
 const App = () => {
   // Since this is a relatively small app, I'll be storing state required throughout the
@@ -25,12 +29,53 @@ const App = () => {
 
   // 5. I will be using emojis in my code comments. 🙌 I'm sorry if that offends anyone. 😜
 
-  const [user, setUser] = useState(null);
-  const [userMovies, addOrRemoveUserMovies] = useHandleUserMovies();
-  // const [movieType, setMovieType] = useState("popular");
+  const [user, setUser] = useState({});
+  const [loginStatus, setLoginStatus] = useState(false);
+  const [userMovies, setUserMovies, setUserMoviesArray] = useHandleUserMovies(
+    user,
+    loginStatus
+  );
   const [navBarLocation, setNavBarLocation] = useState("popular");
   const [query, setQuery] = useState("");
   const [introPage, setIntroPage] = useState(true);
+
+  let unsbuscribeFromFirestore = null;
+
+  useEffect(() => {
+    let unsbuscribeFromAuth = firebase.auth().onAuthStateChanged(userData => {
+      if (userData) {
+        const docRef = firebase
+          .firestore()
+          .collection("users")
+          .doc(`${userData.uid}`)
+          .collection("moviesByYear")
+          .doc("2019");
+
+        unsbuscribeFromFirestore = docRef.onSnapshot(function(snapshot) {
+          console.log("NEW SNAPSHOT!");
+          console.log(snapshot.data().movies);
+          setUserMoviesArray(Object.values(snapshot.data().movies));
+        });
+        setUser(userData);
+        setLoginStatus(true);
+
+        console.log(userData);
+        console.log("There is a user logged in!");
+      } else {
+        setUser({});
+        setLoginStatus(false);
+        setUserMoviesArray([]);
+        // No user is signed in.
+        console.log("No user is signed in...");
+      }
+    });
+
+    // returned function will be called on component unmount
+    return () => {
+      unsbuscribeFromAuth();
+      unsbuscribeFromFirestore();
+    };
+  }, []);
 
   return (
     <>
@@ -45,12 +90,16 @@ const App = () => {
         <MovieGrid
           movieType={navBarLocation}
           query={query}
+          user={user}
+          loginStatus={loginStatus}
           userMovies={userMovies}
-          addOrRemoveUserMovies={addOrRemoveUserMovies}
+          setUserMovies={setUserMovies}
         />
       )}
 
       <Footer />
+      <EmailLogin setUser={setUser} />
+      <EmailSignUp setUser={setUser} />
     </>
   );
 };
