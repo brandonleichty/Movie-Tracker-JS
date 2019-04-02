@@ -10,7 +10,7 @@ const MovieGrid = props => {
     props.userMovies
   );
 
-  const { userMovies, addOrRemoveUserMovies } = props;
+  const { userMovies, setUserMovies, loginStatus, user } = props;
   return (
     <div className="movie-grid-container">
       {movieGrid
@@ -18,9 +18,11 @@ const MovieGrid = props => {
         .map(movie => (
           <Movie
             key={movie.id}
+            user={user}
             movie={movie}
+            loginStatus={loginStatus}
             userMovies={userMovies}
-            addOrRemoveUserMovies={addOrRemoveUserMovies}
+            setUserMovies={setUserMovies}
           />
         ))}
     </div>
