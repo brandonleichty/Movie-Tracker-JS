@@ -18,7 +18,7 @@ function useFetchMovies(typeOfMovies, query = null, userMovies = null) {
   //   }
   // };
 
-  const movieEndpointURL = `https://api.themoviedb.org/3/movie/${typeOfMovies}?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&page=1&region=US`;
+  const movieEndpointURL = `https://api.themoviedb.org/3/movie/${typeOfMovies}?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&media_type=movie&page=1&primary_release_year=2019&sort_by=popularity.desc&vote_count`;
 
   const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&query=${query}&page=1&include_adult=false`;
 
