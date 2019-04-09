@@ -51,7 +51,7 @@ const App = () => {
           .collection("moviesByYear")
           .doc("2019");
 
-        unsbuscribeFromFirestore = docRef.onSnapshot(function(snapshot) {
+        docRef.onSnapshot(function(snapshot) {
           console.log("NEW SNAPSHOT!");
           console.log(snapshot.data().movies);
           setUserMoviesArray(Object.values(snapshot.data().movies));
@@ -73,7 +73,6 @@ const App = () => {
     // returned function will be called on component unmount
     return () => {
       unsbuscribeFromAuth();
-      unsbuscribeFromFirestore();
     };
   }, []);
 
@@ -81,6 +80,7 @@ const App = () => {
     <>
       <Header
         setNavBarLocation={setNavBarLocation}
+        navBarLocation={navBarLocation}
         setQuery={setQuery}
         introPage={introPage}
       />
@@ -98,8 +98,8 @@ const App = () => {
       )}
 
       <Footer />
-      <EmailLogin setUser={setUser} />
-      <EmailSignUp setUser={setUser} />
+      {/* <EmailLogin setUser={setUser} />
+      <EmailSignUp setUser={setUser} /> */}
     </>
   );
 };
