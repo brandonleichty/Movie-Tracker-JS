@@ -5,10 +5,17 @@ import Footer from "./Components/Footer";
 import MovieGrid from "./Components/MovieGrid";
 import IntroPage from "./Components/IntroPage";
 import useHandleUserMovies from "./Hooks/handleUserMoviesHook";
-import EmailLogin from "./AuthComponents/EmailLogin";
-import EmailSignUp from "./AuthComponents/EmailSignUp";
+import Login from "./Components/Login";
 
 import firebase from "./firebase";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 const App = () => {
   // Since this is a relatively small app, I'll be storing state required throughout the
@@ -37,38 +44,99 @@ const App = () => {
   );
   const [navBarLocation, setNavBarLocation] = useState("popular");
   const [query, setQuery] = useState("");
-  const [introPage, setIntroPage] = useState(true);
+  const [introPage, setIntroPage] = useState(false);
 
   let unsbuscribeFromFirestore = null;
 
   useEffect(() => {
-    let unsbuscribeFromAuth = firebase.auth().onAuthStateChanged(userData => {
-      if (userData) {
-        const docRef = firebase
-          .firestore()
-          .collection("users")
-          .doc(`${userData.uid}`)
-          .collection("moviesByYear")
-          .doc("2019");
+    let unsbuscribeFromAuth = firebase
+      .auth()
+      .onAuthStateChanged(async userData => {
+        if (userData) {
+          const usersRef = firebase
+            .firestore()
+            .collection("users")
+            .doc(`${userData.uid}`);
 
-        docRef.onSnapshot(function(snapshot) {
-          console.log("NEW SNAPSHOT!");
-          console.log(snapshot.data().movies);
-          setUserMoviesArray(Object.values(snapshot.data().movies));
-        });
-        setUser(userData);
-        setLoginStatus(true);
+          await usersRef
+            .get()
+            .then(userDoc => {
+              if (userDoc.exists) {
+                console.log("The user that just logged in ALREADY exist! 🤓");
+              } else {
+                // console.log("USER DOC");
+                // console.log(userDoc);
+                // console.log("USER DATA");
+                // console.log(userData);
+                firebase
+                  .firestore()
+                  .collection("users")
+                  .doc(`${userData.uid}`)
+                  .set({
+                    name: userData.providerData[0].displayName,
+                    lastSignInTime: userData.metadata.lastSignInTime,
+                    provider: userData.providerData[0].providerId
+                  });
 
-        console.log(userData);
-        console.log("There is a user logged in!");
-      } else {
-        setUser({});
-        setLoginStatus(false);
-        setUserMoviesArray([]);
-        // No user is signed in.
-        console.log("No user is signed in...");
-      }
-    });
+                firebase
+                  .firestore()
+                  .collection("users")
+                  .doc(`${userData.uid}`)
+                  .collection("userInfo")
+                  .doc("metadata")
+                  .set({
+                    displayName: userData.displayName,
+                    email: userData.email,
+                    phone: userData.phoneNumber,
+                    creationTime: userData.metadata.creationTime,
+                    lastSignInTime: userData.metadata.lastSignInTime,
+                    provider: userData.providerData[0].providerId
+                  });
+
+                firebase
+                  .firestore()
+                  .collection("users")
+                  .doc(`${userData.uid}`)
+                  .collection("moviesByYear")
+                  .doc("2019")
+                  .set({
+                    movies: {}
+                  });
+                console.log(user);
+                console.log(
+                  `A user with the name ${
+                    user.displayName
+                  } was created with the email ${user.email}`
+                );
+              }
+            })
+            .then(() => {
+              const docRef = firebase
+                .firestore()
+                .collection("users")
+                .doc(`${userData.uid}`)
+                .collection("moviesByYear")
+                .doc("2019");
+
+              docRef.onSnapshot(function(snapshot) {
+                console.log("NEW SNAPSHOT!");
+                console.log(snapshot.data().movies);
+                setUserMoviesArray(Object.values(snapshot.data().movies));
+              });
+              setUser(userData);
+              setLoginStatus(true);
+
+              console.log(userData);
+              console.log("There is a user logged in!");
+            });
+        } else {
+          setUser({});
+          setLoginStatus(false);
+          setUserMoviesArray([]);
+          // No user is signed in.
+          console.log("No user is signed in...");
+        }
+      });
 
     // returned function will be called on component unmount
     return () => {
@@ -77,30 +145,38 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <Router>
       <Header
         setNavBarLocation={setNavBarLocation}
         navBarLocation={navBarLocation}
         setQuery={setQuery}
         introPage={introPage}
       />
-      {introPage ? (
-        <IntroPage setIntroPage={setIntroPage} />
-      ) : (
-        <MovieGrid
-          movieType={navBarLocation}
-          query={query}
-          user={user}
-          loginStatus={loginStatus}
-          userMovies={userMovies}
-          setUserMovies={setUserMovies}
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <MovieGrid
+              movieType={navBarLocation}
+              query={query}
+              setQuery={setQuery}
+              user={user}
+              loginStatus={loginStatus}
+              userMovies={userMovies}
+              setUserMovies={setUserMovies}
+              hideNavBar={setIntroPage}
+            />
+          )}
         />
-      )}
-
-      <Footer />
-      {/* <EmailLogin setUser={setUser} />
-      <EmailSignUp setUser={setUser} /> */}
-    </>
+        <Route
+          exact
+          path="/login"
+          render={() => <Login setUser={setUser} hideNavBar={setIntroPage} />}
+        />
+      </Switch>
+      <Footer loginStatus={loginStatus} user={user} />
+    </Router>
   );
 };
 
