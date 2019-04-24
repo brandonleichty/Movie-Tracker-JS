@@ -6,6 +6,7 @@ import checkedIcon from "../Images/tick.svg";
 const POSTER_PATH = "http://image.tmdb.org/t/p/w500";
 
 const Movie = props => {
+  // HOOKS
   const [show, set] = useState(false);
   const transitions = useTransition(show, null, {
     from: { opacity: 0 },
@@ -16,7 +17,7 @@ const Movie = props => {
   const { movie, userMovies, setUserMovies, loginStatus, user } = props;
 
   return transitions.map(({ item, key, props }) => (
-    <animated.div style={props} className="movie-container">
+    <animated.div style={props} key={movie.id} className="movie-container">
       <img src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
 
       <button
