@@ -2,6 +2,14 @@ import React from "react";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
+
 import logo from "../Images/theater.svg";
 
 // The header takes in a few props that are responsible for these things:
@@ -17,19 +25,29 @@ import logo from "../Images/theater.svg";
 //    will be shown if "introPage" is set to false.
 
 const Header = props => {
-  const { setNavBarLocation, setQuery, introPage } = props;
+  const { setNavBarLocation, setQuery, introPage, navBarLocation } = props;
   return (
     <header>
-      <img src={logo} className="site-hero-logo" alt="movie-tracker-js-logo" />
+      <Link to="/">
+        <img
+          src={logo}
+          className="site-hero-logo"
+          alt="movie-tracker-js-logo"
+        />
+      </Link>
       <div className="movie-tracker-title">
         <h1>MOVIE TRACKER</h1>
       </div>
       {introPage ? null : (
         <>
-          <NavBar setNavBarLocation={setNavBarLocation} />
-          <SearchBar setQuery={setQuery} />
+          <NavBar
+            setNavBarLocation={setNavBarLocation}
+            navBarLocation={navBarLocation}
+          />
+          {/* <SearchBar setQuery={setQuery} /> */}
         </>
       )}
+      {navBarLocation === "search" ? <SearchBar setQuery={setQuery} /> : null}
     </header>
   );
 };
