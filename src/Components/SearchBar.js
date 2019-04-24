@@ -4,10 +4,12 @@ const SearchBar = props => {
   const { setNavBarLocation, setQuery } = props;
 
   return (
-    <div className="main-nav">
+    <div className="search-container">
+      <i className="fas fa-search" />
       <input
+        className="search-input"
         type="search"
-        placeholder="type here"
+        placeholder="Search for a movie..."
         // value={value}
         onChange={event => setQuery(event.target.value)}
       />
