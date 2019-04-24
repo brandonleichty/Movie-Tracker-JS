@@ -1,42 +1,103 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const NavBar = props => {
-  const { setNavBarLocation } = props;
+  const [active, setActive] = useState(false);
+  const { setNavBarLocation, navBarLocation } = props;
+
+  // var tabs = $(".tabs");
+  // var selector = $(".tabs").find("a").length;
+  // //var selector = $(".tabs").find(".selector");
+  // var activeItem = tabs.find(".active");
+  // var activeWidth = activeItem.innerWidth();
+  // $(".selector").css({
+  //   left: activeItem.position.left + "px",
+  //   width: activeWidth + "px"
+  // });
+
+  // $(".tabs").on("click", "a", function(e) {
+  //   e.preventDefault();
+  //   $(".tabs a").removeClass("active");
+  //   $(this).addClass("active");
+  //   var activeWidth = $(this).innerWidth();
+  //   var itemPos = $(this).position();
+  //   $(".selector").css({
+  //     left: itemPos.left + "px",
+  //     width: activeWidth + "px"
+  //   });
+  // });
+
+  useEffect(() => {
+    logElement(nav1);
+  }, []);
+
+  function logElement(navLocation) {
+    const activeWidth = navLocation.current.offsetWidth;
+    const itemPosition = navLocation.current.offsetLeft;
+
+    const selector = document.querySelector(".selector");
+    selector.style.left = itemPosition + "px";
+    selector.style.width = activeWidth + "px";
+  }
+
+  const nav1 = React.createRef();
+  const nav2 = React.createRef();
+  const nav3 = React.createRef();
+  const nav4 = React.createRef();
 
   return (
-    <div className="main-nav">
-      <button
-        label="Popular"
-        onClick={() => {
-          setNavBarLocation("popular");
-        }}
-      >
-        Popular
-      </button>
-      <button
-        label="Search"
-        onClick={() => {
-          setNavBarLocation("search");
-        }}
-      >
-        Search
-      </button>
-      <button
-        label="Upcoming"
-        onClick={() => {
-          setNavBarLocation("upcoming");
-        }}
-      >
-        Upcoming
-      </button>
-      <button
-        label="My Movies"
-        onClick={() => {
-          setNavBarLocation("myMovies");
-        }}
-      >
-        My Movies{" "}
-      </button>
+    <div className="wrapper">
+      <nav className="tabs">
+        <div className="selector" />
+        <a
+          href="#"
+          className="active"
+          ref={nav1}
+          className={navBarLocation === "popular" ? "active" : null}
+          onClick={e => {
+            e.preventDefault();
+            setNavBarLocation("popular");
+            logElement(nav1);
+          }}
+        >
+          Popular
+        </a>
+        <a
+          className={navBarLocation === "upcoming" ? "active" : null}
+          ref={nav2}
+          href="#"
+          onClick={e => {
+            e.preventDefault();
+            setNavBarLocation("upcoming");
+            logElement(nav2);
+          }}
+        >
+          Upcoming
+        </a>
+        <a
+          href="#"
+          ref={nav3}
+          onClick={e => {
+            e.preventDefault();
+            setNavBarLocation("myMovies");
+            logElement(nav3);
+          }}
+          className={navBarLocation === "myMovies" ? "active" : null}
+        >
+          My Movies
+        </a>
+        <a
+          href="#"
+          ref={nav4}
+          className={navBarLocation === "search" ? "active" : null}
+          onClick={e => {
+            e.preventDefault();
+            setNavBarLocation("search");
+            logElement(nav4);
+          }}
+        >
+          Search
+        </a>
+      </nav>
     </div>
   );
 };
