@@ -5,7 +5,7 @@ const EmailLogin = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setUser } = props;
+  const { setUser, setExistingLogin } = props;
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -15,58 +15,78 @@ const EmailLogin = props => {
     // 3. If that uID doesn't already exist, create a new document and set the displayName, email, etc.
 
     try {
-      const { userData } = await auth.signInWithEmailAndPassword(
-        email,
-        password
-      );
+      await auth.signInWithEmailAndPassword(email, password);
+      // .then(async userData => {
+      //   console.log(userData.user);
 
-      if (userData) {
-        console.log("YO!");
-        const usersRef = await firestore
-          .collection("users")
-          .doc(`${userData.uid}`);
+      //   if (userData) {
+      //     const user = userData.user;
 
-        usersRef.get().then(userDoc => {
-          if (userDoc.exists) {
-            console.log(
-              `The user ${userData.displayName} exist! uID: ${userData.uid}`
-            );
-            firestore
-              .collection("users")
-              .doc(`${userData.uid}`)
-              .update({
-                lastSignInTime: userData.metadata.lastSignInTime
-              });
+      //     console.log("YO!");
+      //     const usersRef = firestore.collection("users").doc(`${user.uid}`);
 
-            setUser(userData);
-            console.log(userData);
-          }
-        });
-      }
+      //     await usersRef.get().then(userDoc => {
+      //       console.log("LALALALA");
+      //       console.log(userDoc);
+      //       if (userDoc.exists) {
+      //         console.log("💩");
+      //         console.log(userDoc.exists);
+      //         console.log(
+      //           `The user ${user.displayName} exist! uID: ${user.uid}`
+      //         );
+      //         firestore
+      //           .collection("users")
+      //           .doc(`${user.uid}`)
+      //           .update({
+      //             lastSignInTime: user.metadata.lastSignInTime
+      //           });
+
+      //         setUser(user);
+      //         console.log(userData);
+      //       }
+      //     });
+      //   }
+      // });
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <form className="SignUp" onSubmit={handleSubmit}>
-      <h2>Login with email</h2>
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <input type="submit" value="Sign Up" />
-    </form>
+    <div>
+      <div className="email-container">
+        <form className="SignUp" onSubmit={handleSubmit}>
+          <div>
+            <span>
+              <i className="fas fa-at" /> Login with Email
+            </span>
+          </div>
+          <div className="email-input">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="password-input">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
+          <input type="submit" value="Sign Up" />
+        </form>
+      </div>
+      <div className="existing-account-signin">
+        <span>Don't have an account?</span>{" "}
+        <button onClick={() => setExistingLogin(false)}>Sign up.</button>
+      </div>
+    </div>
   );
 };
 
