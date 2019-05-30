@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+temp.js
+MovieBackup.js
+App-backup.js
+settings.json
