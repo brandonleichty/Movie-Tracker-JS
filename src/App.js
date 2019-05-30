@@ -5,6 +5,7 @@ import Footer from "./Components/Footer";
 import MovieGrid from "./Components/MovieGrid";
 import IntroPage from "./Components/IntroPage";
 import useHandleUserMovies from "./Hooks/handleUserMoviesHook";
+import useHandleWatchList from "./Hooks/handleWatchListHook";
 import Login from "./Components/Login";
 
 import firebase from "./firebase";
@@ -38,10 +39,15 @@ const App = () => {
 
   const [user, setUser] = useState({});
   const [loginStatus, setLoginStatus] = useState(false);
+  const [watchList, setWatchList, setWatchListArray] = useHandleWatchList(
+    user,
+    loginStatus
+  );
   const [userMovies, setUserMovies, setUserMoviesArray] = useHandleUserMovies(
     user,
     loginStatus
   );
+
   const [navBarLocation, setNavBarLocation] = useState("popular");
   const [query, setQuery] = useState("");
   const [introPage, setIntroPage] = useState(false);
@@ -102,6 +108,16 @@ const App = () => {
                   .set({
                     movies: {}
                   });
+
+                firebase
+                  .firestore()
+                  .collection("users")
+                  .doc(`${userData.uid}`)
+                  .collection("watchList")
+                  .doc("movies")
+                  .set({
+                    movies: {}
+                  });
                 console.log(user);
                 console.log(
                   `A user with the name ${
@@ -111,17 +127,29 @@ const App = () => {
               }
             })
             .then(() => {
-              const docRef = firebase
+              const userMoviesDocRef = firebase
                 .firestore()
                 .collection("users")
                 .doc(`${userData.uid}`)
                 .collection("moviesByYear")
                 .doc("2019");
 
-              docRef.onSnapshot(function(snapshot) {
+              const userWatchListDocRef = firebase
+                .firestore()
+                .collection("users")
+                .doc(`${userData.uid}`)
+                .collection("watchList")
+                .doc("movies");
+
+              userMoviesDocRef.onSnapshot(function(snapshot) {
                 console.log("NEW SNAPSHOT!");
                 console.log(snapshot.data().movies);
                 setUserMoviesArray(Object.values(snapshot.data().movies));
+              });
+              userWatchListDocRef.onSnapshot(function(snapshot) {
+                console.log("NEW WatchLis SNAPSHOT!");
+                console.log(snapshot.data().movies);
+                setWatchListArray(Object.values(snapshot.data().movies));
               });
               setUser(userData);
               setLoginStatus(true);
@@ -133,6 +161,7 @@ const App = () => {
           setUser({});
           setLoginStatus(false);
           setUserMoviesArray([]);
+          setWatchListArray([]);
           // No user is signed in.
           console.log("No user is signed in...");
         }
@@ -164,7 +193,9 @@ const App = () => {
               user={user}
               loginStatus={loginStatus}
               userMovies={userMovies}
+              watchList={watchList}
               setUserMovies={setUserMovies}
+              setWatchList={setWatchList}
               hideNavBar={setIntroPage}
             />
           )}
