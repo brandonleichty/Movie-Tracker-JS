@@ -67,6 +67,7 @@ footer {
   align-content: center;
   justify-content: center;
   text-align: center;
+  padding-top: 40px;
   /* margin-top: 30px; */
 }
 
@@ -208,7 +209,6 @@ button {
   align-items: center;
   justify-content: center;
   padding-top: 60px;
-  padding-bottom: 40px;
 }
 
 .load-more-movies-button {
@@ -487,4 +487,15 @@ body {
 
 .no-movies-message-div {
   padding: 20px;
+}
+
+.movieButtonDate {
+  width: 100%;
+  color: white;
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+.calendarAddIcon img {
+  height: 70%;
 }
