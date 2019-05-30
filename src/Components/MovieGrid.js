@@ -19,7 +19,9 @@ const MovieGrid = props => {
     loginStatus,
     user,
     movieType,
-    hideNavBar
+    hideNavBar,
+    setWatchList,
+    watchList
   } = props;
 
   // Make sure the nav bar is't hidden
@@ -41,7 +43,9 @@ const MovieGrid = props => {
                 movie={movie}
                 loginStatus={loginStatus}
                 userMovies={userMovies}
+                watchList={watchList}
                 setUserMovies={setUserMovies}
+                setWatchList={setWatchList}
                 navBarLocation={movieType}
               />
             ))}
