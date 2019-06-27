@@ -67,7 +67,8 @@ const useHandleUserMovies = () => {
           id: selectedMovie.id,
           release_date: selectedMovie.release_date,
           poster_path: selectedMovie.poster_path,
-          adult: selectedMovie.adult
+          adult: selectedMovie.adult,
+          textUpdates: false
         };
         console.log(newMovieObject);
         setUserMoviesArray([...userMoviesArray, newMovieObject]);

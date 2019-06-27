@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTransition, animated } from "react-spring";
 import moment from "moment";
+import Checkbox from "./Checkbox";
 
 import addIcon from "../Images/add.svg";
 import calendarAddIcon from "../Images/calendar-add.svg";
@@ -24,13 +25,22 @@ const Movie = props => {
     user,
     navBarLocation,
     setWatchList,
-    watchList
+    watchList,
+    sendSmsReleaseReminders
   } = props;
 
   const releaseDate = moment(movie.release_date);
 
   return transitions.map(({ item, key, props }) => (
-    <animated.div style={props} key={movie.id} className="movie-container">
+    <animated.div
+      style={props}
+      key={movie.id}
+      className={
+        navBarLocation === "myMovies"
+          ? "user-movie-container"
+          : "movie-container"
+      }
+    >
       <img src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
 
       {navBarLocation === "popular" ? (
@@ -60,6 +70,20 @@ const Movie = props => {
           )}
           <div className="movieButtonDate">{releaseDate.format("MMM Do")}</div>
         </button>
+      ) : null}
+
+      {navBarLocation === "myMovies" ? (
+        <>
+          {watchList.some(
+            watchListMovie => watchListMovie["id"] === movie.id
+          ) ? (
+            <>
+              {sendSmsReleaseReminders && loginStatus ? (
+                <Checkbox movie={movie} user={user} />
+              ) : null}
+            </>
+          ) : null}
+        </>
       ) : null}
     </animated.div>
   ));

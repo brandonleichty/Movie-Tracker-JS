@@ -51,6 +51,8 @@ const App = () => {
   const [navBarLocation, setNavBarLocation] = useState("popular");
   const [query, setQuery] = useState("");
   const [introPage, setIntroPage] = useState(false);
+  const [pageNum, setPageNum] = useState(2);
+  const [sendSmsReleaseReminders, setSmsReleaseReminders] = useState(false);
 
   let unsbuscribeFromFirestore = null;
 
@@ -70,10 +72,6 @@ const App = () => {
               if (userDoc.exists) {
                 console.log("The user that just logged in ALREADY exist! 🤓");
               } else {
-                // console.log("USER DOC");
-                // console.log(userDoc);
-                // console.log("USER DATA");
-                // console.log(userData);
                 firebase
                   .firestore()
                   .collection("users")
@@ -97,6 +95,16 @@ const App = () => {
                     creationTime: userData.metadata.creationTime,
                     lastSignInTime: userData.metadata.lastSignInTime,
                     provider: userData.providerData[0].providerId
+                  });
+
+                firebase
+                  .firestore()
+                  .collection("users")
+                  .doc(`${userData.uid}`)
+                  .collection("userInfo")
+                  .doc("preferences")
+                  .set({
+                    sendSmsReleaseReminders: false
                   });
 
                 firebase
@@ -141,16 +149,33 @@ const App = () => {
                 .collection("watchList")
                 .doc("movies");
 
+              const userPreferencesRef = firebase
+                .firestore()
+                .collection("users")
+                .doc(`${userData.uid}`)
+                .collection("userInfo")
+                .doc("preferences");
+
               userMoviesDocRef.onSnapshot(function(snapshot) {
                 console.log("NEW SNAPSHOT!");
                 console.log(snapshot.data().movies);
                 setUserMoviesArray(Object.values(snapshot.data().movies));
               });
               userWatchListDocRef.onSnapshot(function(snapshot) {
-                console.log("NEW WatchLis SNAPSHOT!");
+                console.log("This users Watch List has changed!");
                 console.log(snapshot.data().movies);
                 setWatchListArray(Object.values(snapshot.data().movies));
               });
+              userPreferencesRef.onSnapshot(snapshot => {
+                console.log("The users PREFERENCES have changed!");
+                setSmsReleaseReminders(snapshot.data().sendSmsReleaseReminders);
+                console.log(
+                  `Send SMS release reminders? ${
+                    snapshot.data().sendSmsReleaseReminders
+                  }`
+                );
+              });
+
               setUser(userData);
               setLoginStatus(true);
 
@@ -162,6 +187,7 @@ const App = () => {
           setLoginStatus(false);
           setUserMoviesArray([]);
           setWatchListArray([]);
+          setSmsReleaseReminders(false);
           // No user is signed in.
           console.log("No user is signed in...");
         }
@@ -180,6 +206,7 @@ const App = () => {
         navBarLocation={navBarLocation}
         setQuery={setQuery}
         introPage={introPage}
+        setPageNum={setPageNum}
       />
       <Switch>
         <Route
@@ -187,6 +214,7 @@ const App = () => {
           path="/"
           render={() => (
             <MovieGrid
+              sendSmsReleaseReminders={sendSmsReleaseReminders}
               movieType={navBarLocation}
               query={query}
               setQuery={setQuery}
@@ -197,6 +225,8 @@ const App = () => {
               setUserMovies={setUserMovies}
               setWatchList={setWatchList}
               hideNavBar={setIntroPage}
+              pageNum={pageNum}
+              setPageNum={setPageNum}
             />
           )}
         />

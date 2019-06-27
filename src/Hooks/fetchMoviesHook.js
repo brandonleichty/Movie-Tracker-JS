@@ -7,7 +7,8 @@ function useFetchMovies(
   typeOfMovies,
   setQuery,
   query = null,
-  userMovies = null
+  userMovies = null,
+  loginStatus
 ) {
   const [movieData, setMovieData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -36,9 +37,10 @@ function useFetchMovies(
       const date = moment();
 
       if (navBarLocation === "upcoming") {
-        return `https://api.themoviedb.org/3/discover/movie?api_key=d951026be8c262501cf4a37f22f82184&page=1&language=en-US&primary_release_date.gte=${date.format(
-          "YYYY-MM-DD"
-        )}&sort_by=primary_release_date.asc&with_release_type=3&include_video=false&region=US`;
+        return `/api/upcoming`;
+        // return `https://api.themoviedb.org/3/discover/movie?api_key=d951026be8c262501cf4a37f22f82184&page=1&language=en-US&primary_release_date.gte=${date.format(
+        //   "YYYY-MM-DD"
+        // )}&sort_by=primary_release_date.asc&with_release_type=3&include_video=false&region=US`;
       }
 
       if (navBarLocation === "popular") {
@@ -99,7 +101,7 @@ function useFetchMovies(
 
   useEffect(() => {
     fetchMovieData();
-  }, [typeOfMovies, query]);
+  }, [typeOfMovies, query, loginStatus]);
 
   return [movieData, setMovieData];
 }

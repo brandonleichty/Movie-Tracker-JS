@@ -25,7 +25,13 @@ import logo from "../Images/theater.svg";
 //    will be shown if "introPage" is set to false.
 
 const Header = props => {
-  const { setNavBarLocation, setQuery, introPage, navBarLocation } = props;
+  const {
+    setNavBarLocation,
+    setQuery,
+    introPage,
+    navBarLocation,
+    setPageNum
+  } = props;
   return (
     <header>
       <Link to="/">
@@ -33,6 +39,7 @@ const Header = props => {
           src={logo}
           className="site-hero-logo"
           alt="movie-tracker-js-logo"
+          onClick={() => setNavBarLocation("popular")}
         />
       </Link>
       <div className="movie-tracker-title">
@@ -43,6 +50,7 @@ const Header = props => {
           <NavBar
             setNavBarLocation={setNavBarLocation}
             navBarLocation={navBarLocation}
+            setPageNum={setPageNum}
           />
           {/* <SearchBar setQuery={setQuery} /> */}
         </>

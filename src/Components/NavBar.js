@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const NavBar = props => {
   const [active, setActive] = useState(false);
-  const { setNavBarLocation, navBarLocation } = props;
+  const { setNavBarLocation, navBarLocation, pageNum, setPageNum } = props;
 
   // var tabs = $(".tabs");
   // var selector = $(".tabs").find("a").length;
@@ -26,10 +26,6 @@ const NavBar = props => {
   //   });
   // });
 
-  useEffect(() => {
-    logElement(nav1);
-  }, []);
-
   function logElement(navLocation) {
     const activeWidth = navLocation.current.offsetWidth;
     const itemPosition = navLocation.current.offsetLeft;
@@ -43,6 +39,25 @@ const NavBar = props => {
   const nav2 = React.createRef();
   const nav3 = React.createRef();
   const nav4 = React.createRef();
+
+  function navSliderLocation(navBarLocation) {
+    if (navBarLocation === "popular") {
+      return nav1;
+    }
+    if (navBarLocation === "upcoming") {
+      return nav2;
+    }
+    if (navBarLocation === "myMovies") {
+      return nav3;
+    }
+    if (navBarLocation === "search") {
+      return nav4;
+    }
+  }
+
+  useEffect(() => {
+    logElement(navSliderLocation(navBarLocation));
+  }, []);
 
   return (
     <div className="wrapper">
@@ -69,6 +84,7 @@ const NavBar = props => {
             e.preventDefault();
             setNavBarLocation("upcoming");
             logElement(nav2);
+            setPageNum(2);
           }}
         >
           Upcoming
@@ -80,6 +96,7 @@ const NavBar = props => {
             e.preventDefault();
             setNavBarLocation("myMovies");
             logElement(nav3);
+            setPageNum(2);
           }}
           className={navBarLocation === "myMovies" ? "active" : null}
         >
