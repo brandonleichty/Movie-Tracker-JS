@@ -57,7 +57,8 @@ const NavBar = props => {
 
   useEffect(() => {
     logElement(navSliderLocation(navBarLocation));
-  }, []);
+    console.log("IT WORKED!!");
+  }, [navBarLocation]);
 
   return (
     <div className="wrapper">
