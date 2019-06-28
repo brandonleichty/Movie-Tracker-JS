@@ -4,22 +4,14 @@ const cron = require("node-cron");
 
 const twilioFunctions = require("./twilioMessageFunctions");
 
-if (process.env.NODE_ENV === "production") {
-  admin.initializeApp({
-    projectId: process.env.FIRESTORE_ADMIN_KEY_PROJECT_ID,
-    private_key: process.env.FIRESTORE_ADMIN_KEY_PRIVATE_KEY.replace(
-      /\\n/g,
-      "\n"
-    ),
-    clientEmail: process.env.FIRESTORE_ADMIN_KEY_CLIENT_EMAIL
-  });
-} else {
-  const serviceAccount = require("./ServiceAccount/serviceAccountKey.json");
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://movie-tracker-js.firebaseio.com"
-  });
-}
+admin.initializeApp({
+  projectId: process.env.FIRESTORE_ADMIN_KEY_PROJECT_ID,
+  private_key: process.env.FIRESTORE_ADMIN_KEY_PRIVATE_KEY.replace(
+    /\\n/g,
+    "\n"
+  ),
+  clientEmail: process.env.FIRESTORE_ADMIN_KEY_CLIENT_EMAIL
+});
 
 const adminDB = admin.firestore();
 
