@@ -6,7 +6,6 @@ const fetch = require("node-fetch");
 const moment = require("moment");
 const mongoose = require("mongoose");
 const compression = require("compression");
-// const pino = require("express-pino-logger")();
 const sortBy = require("lodash.sortby");
 const uniqBy = require("lodash.uniqby");
 const differenceBy = require("lodash.differenceby");
@@ -49,7 +48,6 @@ const app = express();
 const dev = app.get("env") !== "production";
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(pino);
 
 if (!dev) {
   app.disable("x-powered-by");
