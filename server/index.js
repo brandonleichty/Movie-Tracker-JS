@@ -3,10 +3,13 @@ const express = require("express");
 const fetch = require("node-fetch");
 const moment = require("moment");
 const mongoose = require("mongoose");
+const compression = require("compression");
 const pino = require("express-pino-logger")();
 const sortBy = require("lodash.sortby");
 const uniqBy = require("lodash.uniqby");
 const differenceBy = require("lodash.differenceby");
+const morgan = require("morgan");
+const path = require("path");
 
 require("./FirestoreAdmin");
 
@@ -42,20 +45,25 @@ const MovieSchema = new Schema({
 const MovieModel = mongoose.model("upcomingmovies", MovieSchema);
 
 const app = express();
+const dev = app.get("env") !== "production";
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(pino);
 
-// let movies;
+if (!dev) {
+  app.disable("x-powered-by");
+  app.use(compression());
+  app.use(morgan("common"));
 
-// app.get("/api/greeting", (req, res) => {
-//   const name = req.query.name || "World";
-//   res.setHeader("Content-Type", "application/json");
-//   res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
-// });
+  app.use(express.static(path.resolve(__dirname, "../build")));
+
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "../build", "index.html"));
+  // });
+}
 
 async function getUpcomingMovies() {
-  const CURRENT_DATE = moment();
+  const CURRENT_DATE = moment().add(1, "day");
   const SEVEN_MONTHS_FROM_CURRENT_DATE = moment().add(7, "months");
 
   const endPoint = `https://api.themoviedb.org/3/discover/movie?api_key=${
@@ -165,7 +173,7 @@ app.listen(3001, async () => {
     const today = moment().format("YYYY-MM-DD");
     console.log("Successfully connected to your MongoDB cluster! 🙌");
 
-    await MovieModel.deleteMany({ release_date: { $lt: today } });
+    await MovieModel.deleteMany({ release_date: { $lte: today } });
 
     const currentMovies = await MovieModel.find();
     const diffMovies = differenceBy(movies, currentMovies, "id");
