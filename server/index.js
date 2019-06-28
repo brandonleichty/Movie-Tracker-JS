@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const bodyParser = require("body-parser");
 const express = require("express");
 const fetch = require("node-fetch");
@@ -19,7 +21,6 @@ const client = require("twilio")(
   process.env.TWILIO_ACCOUT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
-require("dotenv").config();
 
 // Define schema
 const Schema = mongoose.Schema;
