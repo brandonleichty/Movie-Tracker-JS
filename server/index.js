@@ -121,15 +121,15 @@ app.post("/api/messages", (req, res) => {
   res.header("Content-Type", "application/json");
 
   const fullName = req.body.name;
-  const firstName = fullName
-    .split(" ")
-    .slice(0, -1)
-    .join(" ");
+  // const firstName = fullName
+  //   .split(" ")
+  //   .slice(0, -1)
+  //   .join(" ");
   client.messages
     .create({
       from: process.env.TWILIO_PHONE_NUMBER,
       to: req.body.to,
-      body: `Hey ${firstName}, you've ENABLED Movie Tracker reminders! We'll send you a reminder one day before the movie you want to see is released in theaters.`
+      body: `Hey ${fullName}, you've ENABLED Movie Tracker reminders! We'll send you a reminder one day before the movie you want to see is released in theaters.`
     })
     .then(() => {
       res.send(JSON.stringify({ success: true }));
