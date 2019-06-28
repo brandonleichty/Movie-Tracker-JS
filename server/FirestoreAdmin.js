@@ -4,7 +4,8 @@ const cron = require("node-cron");
 
 const twilioFunctions = require("./twilioMessageFunctions");
 
-const serviceAccount = require("./ServiceAccount/serviceAccountKey.json");
+const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://movie-tracker-js.firebaseio.com"
