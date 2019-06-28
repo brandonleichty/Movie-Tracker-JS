@@ -154,7 +154,7 @@ app.get("/api/upcoming/:page?", async (req, res) => {
   res.send(JSON.stringify({ results: movies, total_pages: totalPages }));
 });
 
-app.listen(3001, async () => {
+app.listen(process.env.PORT || 3001, async () => {
   console.log("Express server is running on localhost:3001");
   const movieResults = await getUpcomingMovies();
   const movies = movieResults.filter(movie => movie.poster_path != null);
