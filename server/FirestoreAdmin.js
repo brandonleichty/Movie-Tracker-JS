@@ -100,7 +100,7 @@ const dayBeforeMovie = moment()
   .format("YYYY-MM-DD");
 
 // Send text reminders every day at 12-noon;
-cron.schedule("00 12 * * *", () => {
+cron.schedule("00 10 * * *", () => {
   console.log("running a task every minute");
   getAllUsers().then(userData => {
     for (const user of userData) {
