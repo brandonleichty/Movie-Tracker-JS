@@ -128,7 +128,8 @@ footer {
 }
 
 .movie-tracker-title {
-  color: #3a3a3a;
+  /* color: #3a3a3a; */
+  color: #2b2b2b;
   font-family: Gilroy-Bold, serif;
   letter-spacing: 3px;
   font-size: calc(10px + 2vmin);
@@ -137,7 +138,7 @@ footer {
 
 @media (max-width: 500px) {
   .movie-tracker-title {
-    font-size: calc(9px + 2vmin);
+    font-size: calc(8px + 2vmin);
   }
 }
 
