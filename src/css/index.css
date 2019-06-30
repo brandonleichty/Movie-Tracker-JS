@@ -183,7 +183,7 @@ footer {
   height: 0;
   width: 0;
   max-height: 240px;
-  padding-bottom: calc(1.5 * 100%);
+  padding-top: calc(1.5 * 100%);
 }
 
 .user-movie-container:before {
@@ -197,8 +197,7 @@ footer {
 .movie-poster {
   width: 100%;
   object-fit: cover;
-  height: 50%;
-  /* max-width: 160px; */
+  max-height: 50%;
 }
 
 .movie-container img {
@@ -695,7 +694,7 @@ input {
   display: flex;
   font-size: 14px;
   justify-content: center;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 .toggle-input {
   position: absolute;
