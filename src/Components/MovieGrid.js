@@ -78,7 +78,7 @@ const MovieGrid = props => {
             </div>
           ) : null}
           {movieType === "myMovies" ? (
-            <div className="movie-grid-container">
+            <div className="user-movie-grid-container">
               {userMovies.map(movie => (
                 <Movie
                   key={movie.id}
@@ -100,7 +100,7 @@ const MovieGrid = props => {
                 <div className="user-watchlist">
                   Upcoming movies you'd like to see...
                 </div>
-                <div className="movie-grid-container">
+                <div className="user-movie-grid-container">
                   {watchList.map(movie => (
                     <>
                       <Movie
