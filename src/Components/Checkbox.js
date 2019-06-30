@@ -29,7 +29,7 @@ const Checkbox = props => {
   const { movie, user } = props;
 
   return (
-    <div className="login-container">
+    <div className="toggle-container">
       <div className="toggle-switch">
         <input
           className="toggle-input"
