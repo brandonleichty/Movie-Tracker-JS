@@ -41,8 +41,12 @@ const Movie = props => {
           : "movie-container"
       }
     >
-      <img src={`${POSTER_PATH}${movie.poster_path}`} alt={movie.title} />
-
+      <img
+        src={`${POSTER_PATH}${movie.poster_path}`}
+        alt={movie.title}
+        title={movie.title}
+        className="movie-poster"
+      />
       {navBarLocation === "popular" ? (
         <button
           className="add-button"
