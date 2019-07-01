@@ -114,7 +114,7 @@ const PhoneInput = props => {
                 onChange={e => setPhoneUserInput(e.target.value)}
                 name="phone"
                 value={phoneUserInput}
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 required
               />
             </div>
