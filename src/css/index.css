@@ -165,9 +165,10 @@ footer {
 }
 
 .movie-container {
+  overflow: hidden;
   display: flex;
-  /* place-items: center center; */
   flex-wrap: wrap;
+  width: 100%;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -194,12 +195,14 @@ footer {
   right: 0;
   bottom: 0;
   left: 0;
-}
-
-.movie-container img {
-  width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+.add-button img {
+  width: 100%;
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
 }
 
 .user-movie-container {
