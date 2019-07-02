@@ -177,21 +177,11 @@ footer {
   /* box-shadow: 10px 10px 120px 0px rgba(66,24,66,1); */
 }
 
-.movie-container:before {
-  content: "";
+.movie-poster-container {
+  width: 100%;
   display: block;
+  padding-bottom: 150%;
   height: 0;
-  width: 0;
-  max-height: 240px;
-  padding-top: calc(1.5 * 100%);
-}
-
-.user-movie-container:before {
-  content: "";
-  display: block;
-  height: 0;
-  width: 0;
-  padding-bottom: calc(1.5 * 100%);
 }
 
 .movie-poster {
