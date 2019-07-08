@@ -10,7 +10,7 @@ import Google from "../AuthComponents/Google";
 
 const Login = props => {
   const [existingLogin, setExistingLogin] = useState(true);
-  const { setUser, hideNavBar } = props;
+  const { setUser, hideNavBar, setNavBarLocation } = props;
 
   hideNavBar(true);
 
@@ -28,7 +28,11 @@ const Login = props => {
           <EmailLogin setUser={setUser} setExistingLogin={setExistingLogin} />
         </>
       ) : (
-        <EmailSignUp setUser={setUser} setExistingLogin={setExistingLogin} />
+        <EmailSignUp
+          setUser={setUser}
+          setExistingLogin={setExistingLogin}
+          setNavBarLocation={setNavBarLocation}
+        />
       )}
     </div>
   );
