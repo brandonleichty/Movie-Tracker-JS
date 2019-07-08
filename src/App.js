@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import MovieGrid from "./Components/MovieGrid";
-import IntroPage from "./Components/IntroPage";
 import useHandleUserMovies from "./Hooks/handleUserMoviesHook";
 import useHandleWatchList from "./Hooks/handleWatchListHook";
 import Login from "./Components/Login";
