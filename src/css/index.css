@@ -159,7 +159,7 @@ footer {
   padding-right: 10%;
   padding-top: 50px;
   place-content: center center;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 170px));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 175px));
   grid-gap: 25px;
   grid-area: main;
 }
@@ -223,13 +223,13 @@ footer {
   .movie-grid-container {
     padding-left: 20%;
     padding-right: 20%;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 170px));
   }
 
   .user-movie-grid-container {
     padding-left: 20%;
     padding-right: 20%;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 0fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 170px));
   }
 }
 
@@ -575,7 +575,7 @@ body {
 .search-input {
   box-sizing: border-box;
   font-family: gilroy-medium;
-  font-size: 22px;
+  font-size: 19px;
   -webkit-appearance: none;
   color: inherit;
   /* font-weight: 600; */
