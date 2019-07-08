@@ -31,6 +31,8 @@ const Movie = props => {
 
   const releaseDate = moment(movie.release_date);
 
+  const todaysDate = moment();
+
   return transitions.map(({ item, key, props }) => (
     <animated.div
       style={props}
@@ -89,6 +91,39 @@ const Movie = props => {
               ) : null}
             </>
           ) : null}
+        </>
+      ) : null}
+
+      {navBarLocation === "search" ? (
+        <>
+          {releaseDate <= todaysDate ? (
+            <button
+              className="add-button"
+              onClick={() => setUserMovies(movie, user, loginStatus)}
+            >
+              {userMovies.some(myMovie => myMovie["id"] === movie.id) ? (
+                <img src={checkedIcon} alt="" />
+              ) : (
+                <img src={addIcon} alt="" />
+              )}
+            </button>
+          ) : (
+            <button
+              className="add-button"
+              onClick={() => setWatchList(movie, user, loginStatus)}
+            >
+              {watchList.some(
+                watchListMovie => watchListMovie["id"] === movie.id
+              ) ? (
+                <img src={checkedIcon} alt="" />
+              ) : (
+                <img src={calendarAddIcon} alt="" />
+              )}
+              <div className="movieButtonDate">
+                {releaseDate.format("MMM Do")}
+              </div>
+            </button>
+          )}
         </>
       ) : null}
     </animated.div>
