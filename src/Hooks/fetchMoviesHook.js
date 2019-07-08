@@ -74,7 +74,7 @@ function useFetchMovies(
 
     if (typeOfMovies === "myMovies") {
       setQuery("");
-      setMovieData(userMovies);
+      // setMovieData(userMovies);
     }
 
     if (typeOfMovies === "search") {
