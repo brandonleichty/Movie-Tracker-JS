@@ -44,7 +44,9 @@ const MovieGrid = props => {
 
   return (
     <div>
-      {movieType === "myMovies" && userMovies.length === 0 ? (
+      {movieType === "myMovies" &&
+      userMovies.length === 0 &&
+      watchList.length === 0 ? (
         <EmptyMovies loginStatus={loginStatus} />
       ) : (
         <>
@@ -77,7 +79,7 @@ const MovieGrid = props => {
                 ))}
             </div>
           ) : null}
-          {movieType === "myMovies" ? (
+          {movieType === "myMovies" && userMovies.length > 0 ? (
             <div className="user-movie-grid-container">
               {userMovies.map(movie => (
                 <Movie
