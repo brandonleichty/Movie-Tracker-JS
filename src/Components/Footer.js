@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { firestore, auth, signOut } from "../firebase";
 
 import {
@@ -14,13 +14,18 @@ import {
 
 const Footer = props => {
   const { loginStatus, user } = props;
+  const [userDisplayName, setUserDisplayName] = useState(null);
+
+  useEffect(() => {
+    setUserDisplayName(user.displayName);
+  }, [user.displayName]);
 
   return (
     <footer>
       {loginStatus ? (
         <div>
           <span>
-            You're logged in as {user.displayName} |{" "}
+            You're logged in as {userDisplayName} |{" "}
             <Link to="/" onClick={signOut}>
               Log Out!
             </Link>
