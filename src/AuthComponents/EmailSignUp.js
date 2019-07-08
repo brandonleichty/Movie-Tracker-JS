@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { firestore, auth, signOut } from "../firebase";
+import firebase from "firebase/app";
 
 import {
   BrowserRouter as Router,
@@ -13,8 +14,9 @@ const EmailSignUp = props => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirectHome, setRedirectHome] = useState(false);
 
-  const { setUser, setExistingLogin } = props;
+  const { setUser, setExistingLogin, setNavBarLocation } = props;
 
   const currentUTCtime = new Date().toUTCString();
 
@@ -26,7 +28,20 @@ const EmailSignUp = props => {
     // 3. If that uID doesn't already exist, create a new document and set the displayName, email, etc.
 
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
+      await auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(async () => {
+          console.log("🍩🍩🍩🍩🍩🍩");
+          await firebase
+            .auth()
+            .currentUser.updateProfile({
+              displayName: displayName
+            })
+            .then(() => {
+              setNavBarLocation("myMovies");
+              setRedirectHome(true);
+            });
+        });
     } catch (error) {
       console.error(error);
     }
@@ -73,6 +88,7 @@ const EmailSignUp = props => {
       </div>
       <div className="email-signup-back-button">
         <button onClick={() => setExistingLogin(true)}>Back</button>
+        {redirectHome ? <Redirect to={"/"} /> : null}
       </div>
     </div>
   );
