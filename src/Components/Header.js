@@ -55,7 +55,9 @@ const Header = props => {
           {/* <SearchBar setQuery={setQuery} /> */}
         </>
       )}
-      {navBarLocation === "search" ? <SearchBar setQuery={setQuery} /> : null}
+      {navBarLocation === "search" && introPage === false ? (
+        <SearchBar setQuery={setQuery} />
+      ) : null}
     </header>
   );
 };
