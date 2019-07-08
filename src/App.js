@@ -232,10 +232,16 @@ const App = () => {
         <Route
           exact
           path="/login"
-          render={() => <Login setUser={setUser} hideNavBar={setIntroPage} />}
+          render={() => (
+            <Login
+              setUser={setUser}
+              hideNavBar={setIntroPage}
+              setNavBarLocation={setNavBarLocation}
+            />
+          )}
         />
       </Switch>
-      <Footer loginStatus={loginStatus} user={user} />
+      <Footer loginStatus={loginStatus} user={user} hideNavBar={setIntroPage} />
     </Router>
   );
 };
