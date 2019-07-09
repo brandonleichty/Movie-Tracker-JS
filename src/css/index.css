@@ -59,7 +59,7 @@ body {
   padding: 0;
   background-color: #f0f0f0;
 
-  font-family: "Gilroy-Medium", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: "gilroy-medium", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -287,32 +287,15 @@ footer {
   place-items: center center;
 }
 
-.first-movie-div {
-  border-radius: 10px;
-  background-color: #dddddd;
-  border: 6px dashed white;
-  width: 150px;
-  height: 250px;
-  display: grid;
-  place-items: center center;
-  align-content: center;
-  text-align: center;
-  font-family: "Bitter", serif;
-  cursor: pointer;
-}
-
-.add-first-movie img {
-  width: 30%;
-}
-
-/* END Intro Page CSS */
-
 /* Add-button CSS START */
 
 .add-button img {
   color: #fff;
   font-weight: bold;
   height: 60%;
+}
+
+.calendar-button img {
   padding-left: 2px;
 }
 
@@ -331,9 +314,9 @@ button {
 
 .load-more-movies-button {
   display: flex;
-  padding: 15px 50px;
+  padding: 15px 50px 10px 50px;
   text-decoration: none;
-  font-family: "Poppins", sans-serif;
+  font-family: Gilroy-SemiBold, "Poppins", sans-serif;
   font-size: 20px;
   color: white;
   background: linear-gradient(135deg, #5c54dd, #b38acc);
@@ -349,7 +332,7 @@ button {
 /* START Nav Bar */
 
 body {
-  font-family: "gilroy", sans-serif;
+  font-family: "gilroy-medium", sans-serif;
 }
 
 .wrapper {
@@ -462,8 +445,8 @@ body {
   line-height: 1.17649;
   font-weight: 400;
   letter-spacing: -0.022em;
-  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
-    "Arial", sans-serif;
+  font-family: "gilroy-bold", "SF Pro Text", "SF Pro Icons", "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
 
   text-align: center;
   white-space: nowrap;
@@ -498,8 +481,8 @@ body {
   line-height: 1.17649;
   font-weight: 400;
   letter-spacing: -0.022em;
-  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
-    "Arial", sans-serif;
+  font-family: "gilroy-medium", "SF Pro Text", "SF Pro Icons", "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
 
   text-align: center;
   white-space: nowrap;
@@ -543,8 +526,8 @@ body {
   font-weight: 400;
   letter-spacing: -0.022em;
   padding-top: 30px;
-  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
-    "Arial", sans-serif;
+  font-family: "gilroy-semibold", "SF Pro Text", "SF Pro Icons",
+    "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 .email-signup-back-button {
@@ -673,7 +656,7 @@ body {
   height: 56px;
   border-radius: 82px;
   background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0px 29px 0 rgba(0, 0, 0, 0.04);
+  box-shadow: 0 0px 29px 0 rgba(255, 247, 247, 0.04);
   border: none;
   color: #444;
   font-family: "gilroy-medium";
