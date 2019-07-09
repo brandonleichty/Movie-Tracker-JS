@@ -253,7 +253,6 @@ footer {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding-bottom: 0;
-  padding-top: 4px;
 
   text-decoration: none;
   border: none;
@@ -297,6 +296,10 @@ footer {
 
 .calendar-button img {
   padding-left: 2px;
+}
+
+.calendar-button {
+  padding-top: 4px;
 }
 
 button {
