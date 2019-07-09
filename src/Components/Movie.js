@@ -66,7 +66,7 @@ const Movie = props => {
 
       {navBarLocation === "upcoming" ? (
         <button
-          className="add-button"
+          className="add-button calendar-button"
           onClick={() => setWatchList(movie, user, loginStatus)}
         >
           {watchList.some(
@@ -109,7 +109,7 @@ const Movie = props => {
             </button>
           ) : (
             <button
-              className="add-button"
+              className="add-button calendar-button"
               onClick={() => setWatchList(movie, user, loginStatus)}
             >
               {watchList.some(
