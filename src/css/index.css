@@ -224,19 +224,19 @@ footer {
   .movie-grid-container {
     padding-left: 20%;
     padding-right: 20%;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 170px));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 
   .user-movie-grid-container {
     padding-left: 20%;
     padding-right: 20%;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 170px));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 
 @media (max-width: 600px) {
   .user-movie-grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 130px));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   }
 }
 
