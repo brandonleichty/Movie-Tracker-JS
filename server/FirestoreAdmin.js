@@ -4,14 +4,36 @@ const cron = require("node-cron");
 
 const twilioFunctions = require("./twilioMessageFunctions");
 
+// admin.initializeApp({
+//   projectId: process.env.FIRESTORE_ADMIN_KEY_PROJECT_ID,
+//   private_key: process.env.FIRESTORE_ADMIN_KEY_PRIVATE_KEY.replace(
+//     /\\n/g,
+//     "\n"
+//   ),
+//   clientEmail: process.env.FIRESTORE_ADMIN_KEY_CLIENT_EMAIL
+// });
+
 admin.initializeApp({
-  projectId: process.env.FIRESTORE_ADMIN_KEY_PROJECT_ID,
-  private_key: process.env.FIRESTORE_ADMIN_KEY_PRIVATE_KEY.replace(
-    /\\n/g,
-    "\n"
-  ),
-  clientEmail: process.env.FIRESTORE_ADMIN_KEY_CLIENT_EMAIL
+  credential: admin.credential.cert({
+    type: process.env.FIREBASE_TYPE,
+    project_id: process.env.FIREBASE_PROJECT_ID,
+    private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+    private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+    client_id: process.env.FIREBASE_CLIENT_ID,
+    auth_uri: process.env.FIREBASE_AUTH_URI,
+    token_uri: process.env.FIREBASE_TOKEN_URI,
+    auth_provider_x509_cert_url:
+      process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+    client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL
+  })
 });
+
+// let serviceAccount = require("./ServiceAccount/serviceAccountKey.json");
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
 
 const adminDB = admin.firestore();
 
@@ -100,8 +122,10 @@ const dayBeforeMovie = moment()
   .format("YYYY-MM-DD");
 
 // Send text reminders every day at 12-noon;
-cron.schedule("05 06 * * *", () => {
+// cron.schedule("05 06 * * *", () => {
+const sendTextUpdates = () => {
   getAllUsers().then(userData => {
+    console.log("pooooooop!!");
     for (const user of userData) {
       // console.log("☎️");
       // console.log(user.phone);
@@ -109,7 +133,10 @@ cron.schedule("05 06 * * *", () => {
       const movies = Object.values(user.movies);
       movies.forEach(movie => {
         if (
-          moment(movie.release_date).isSame(dayBeforeMovie) &&
+          moment(movie.release_date, "YYYY-MM-DD").isSame(
+            dayBeforeMovie,
+            "YYYY-MM-DD"
+          ) &&
           movie.textUpdates
         ) {
           twilioFunctions.sendMovieReminderSMS(user.phone, movie.title);
@@ -130,11 +157,6 @@ cron.schedule("05 06 * * *", () => {
       // }
     }
   });
-});
+};
 
-// var cronJob1 = new CronJob({
-//   cronTime: "42 17 00 * * * ",
-//   onTick: ,
-//   start: true,
-//   runOnInit: false
-// });
+module.exports = sendTextUpdates;
