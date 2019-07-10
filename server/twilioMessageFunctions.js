@@ -1,8 +1,8 @@
+require("dotenv").config();
 const client = require("twilio")(
   process.env.TWILIO_ACCOUT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
-require("dotenv").config();
 
 exports.sendMovieReminderSMS = function(phone, movie) {
   // Maybe add this functionallity later
