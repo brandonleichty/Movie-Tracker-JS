@@ -5,7 +5,13 @@ const LoadMoreMovies = props => {
   // const [pageNum, setPageNum] = useState(2);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(2);
-  const { movieGrid, setMovieGrid, movieType, pageNum, setPageNum } = props;
+  const {
+    movieGrid,
+    setMovieGrid,
+    navBarLocation,
+    pageNum,
+    setPageNum
+  } = props;
 
   async function loadMore() {
     //Where should the page number state be held? In the local component or in the highest parent component? Don't want to prop drill too much.
@@ -15,9 +21,9 @@ const LoadMoreMovies = props => {
       setLoading(true);
 
       function endpointToFetch() {
-        if (movieType === "popular") {
-          return `https://api.themoviedb.org/3/movie/${movieType}?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&media_type=movie&page=${pageNum}&primary_release_year=2019&sort_by=popularity.desc&vote_count`;
-        } else if (movieType === "upcoming") {
+        if (navBarLocation === "trending") {
+          return `https://api.themoviedb.org/3/movie/popular?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&media_type=movie&page=${pageNum}&primary_release_year=2019&sort_by=popularity.desc&vote_count`;
+        } else if (navBarLocation === "upcoming") {
           return `/api/upcoming/${pageNum}`;
         }
       }

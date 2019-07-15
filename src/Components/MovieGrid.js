@@ -9,7 +9,7 @@ import { useFetchMovies } from "../Hooks/fetchMoviesHook";
 
 const MovieGrid = props => {
   const [movieGrid, setMovieGrid] = useFetchMovies(
-    props.movieType,
+    props.navBarLocation,
     props.setQuery,
     props.query,
     props.userMovies,
@@ -21,7 +21,7 @@ const MovieGrid = props => {
     setUserMovies,
     loginStatus,
     user,
-    movieType,
+    navBarLocation,
     hideNavBar,
     setWatchList,
     watchList,
@@ -44,22 +44,22 @@ const MovieGrid = props => {
 
   return (
     <div>
-      {movieType === "myMovies" &&
+      {navBarLocation === "myMovies" &&
       userMovies.length === 0 &&
       watchList.length === 0 ? (
         <EmptyMovies loginStatus={loginStatus} />
       ) : (
         <>
-          {movieType === "myMovies" && userMovies.length > 0 ? (
+          {navBarLocation === "myMovies" && userMovies.length > 0 ? (
             <UserMovieCount
               userMovies={userMovies}
               user={user}
               loginStatus={loginStatus}
             />
           ) : null}
-          {movieType === "popular" ||
-          movieType === "upcoming" ||
-          movieType === "search" ? (
+          {navBarLocation === "trending" ||
+          navBarLocation === "upcoming" ||
+          navBarLocation === "search" ? (
             <div className="movie-grid-container">
               {movieGrid
                 .filter(movie => movie.adult === false)
@@ -74,12 +74,12 @@ const MovieGrid = props => {
                     watchList={watchList}
                     setUserMovies={setUserMovies}
                     setWatchList={setWatchList}
-                    navBarLocation={movieType}
+                    navBarLocation={navBarLocation}
                   />
                 ))}
             </div>
           ) : null}
-          {movieType === "myMovies" && userMovies.length > 0 ? (
+          {navBarLocation === "myMovies" && userMovies.length > 0 ? (
             <div className="user-movie-grid-container">
               {userMovies.map(movie => (
                 <Movie
@@ -91,13 +91,13 @@ const MovieGrid = props => {
                   watchList={watchList}
                   setUserMovies={setUserMovies}
                   setWatchList={setWatchList}
-                  navBarLocation={movieType}
+                  navBarLocation={navBarLocation}
                 />
               ))}
             </div>
           ) : null}
           <>
-            {movieType === "myMovies" && watchList.length > 0 ? (
+            {navBarLocation === "myMovies" && watchList.length > 0 ? (
               <>
                 <div className="user-watchlist">
                   Upcoming movies you'd like to see...
@@ -114,7 +114,7 @@ const MovieGrid = props => {
                         watchList={watchList}
                         setUserMovies={setUserMovies}
                         setWatchList={setWatchList}
-                        navBarLocation={movieType}
+                        navBarLocation={navBarLocation}
                         sendSmsReleaseReminders={sendSmsReleaseReminders}
                       />
                     </>
@@ -132,11 +132,11 @@ const MovieGrid = props => {
           </>
         </>
       )}
-      {movieType === "popular" || movieType === "upcoming" ? (
+      {navBarLocation === "trending" || navBarLocation === "upcoming" ? (
         <LoadMoreMovies
           movieGrid={movieGrid}
           setMovieGrid={setMovieGrid}
-          movieType={movieType}
+          navBarLocation={navBarLocation}
           pageNum={pageNum}
           setPageNum={setPageNum}
         />

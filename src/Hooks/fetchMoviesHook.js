@@ -43,8 +43,8 @@ function useFetchMovies(
         // )}&sort_by=primary_release_date.asc&with_release_type=3&include_video=false&region=US`;
       }
 
-      if (navBarLocation === "popular") {
-        return `https://api.themoviedb.org/3/movie/${typeOfMovies}?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&media_type=movie&page=1&primary_release_year=2019&sort_by=popularity.desc&vote_count&region=US`;
+      if (navBarLocation === "trending") {
+        return `https://api.themoviedb.org/3/movie/popular?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&media_type=movie&page=1&primary_release_year=2019&sort_by=popularity.desc&vote_count&region=US`;
       }
 
       if (navBarLocation === "search") {
@@ -53,7 +53,7 @@ function useFetchMovies(
     };
 
     const dataToFetch = movieDatabaseEndpoint(typeOfMovies);
-    if (typeOfMovies === "popular" || typeOfMovies === "upcoming") {
+    if (typeOfMovies === "trending" || typeOfMovies === "upcoming") {
       setQuery("");
       try {
         setLoading(true);

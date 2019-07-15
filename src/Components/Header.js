@@ -39,7 +39,7 @@ const Header = props => {
           src={logo}
           className="site-hero-logo"
           alt="movie-tracker-js-logo"
-          onClick={() => setNavBarLocation("popular")}
+          onClick={() => setNavBarLocation("trending")}
         />
       </Link>
       <div className="movie-tracker-title">

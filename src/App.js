@@ -47,7 +47,7 @@ const App = () => {
     loginStatus
   );
 
-  const [navBarLocation, setNavBarLocation] = useState("popular");
+  const [navBarLocation, setNavBarLocation] = useState("trending");
   const [query, setQuery] = useState("");
   const [introPage, setIntroPage] = useState(false);
   const [pageNum, setPageNum] = useState(2);
@@ -214,7 +214,7 @@ const App = () => {
           render={() => (
             <MovieGrid
               sendSmsReleaseReminders={sendSmsReleaseReminders}
-              movieType={navBarLocation}
+              navBarLocation={navBarLocation}
               query={query}
               setQuery={setQuery}
               user={user}

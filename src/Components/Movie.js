@@ -51,7 +51,7 @@ const Movie = props => {
           className="movie-poster"
         />
       </div>
-      {navBarLocation === "popular" ? (
+      {navBarLocation === "trending" ? (
         <button
           className="add-button"
           onClick={() => setUserMovies(movie, user, loginStatus)}
