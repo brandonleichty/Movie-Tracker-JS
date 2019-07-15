@@ -3,28 +3,16 @@ import React, { useState, useEffect } from "react";
 const NavBar = props => {
   const [active, setActive] = useState(false);
   const { setNavBarLocation, navBarLocation, pageNum, setPageNum } = props;
+  const [windowSize, setWindowWidth] = useState(null);
 
-  // var tabs = $(".tabs");
-  // var selector = $(".tabs").find("a").length;
-  // //var selector = $(".tabs").find(".selector");
-  // var activeItem = tabs.find(".active");
-  // var activeWidth = activeItem.innerWidth();
-  // $(".selector").css({
-  //   left: activeItem.position.left + "px",
-  //   width: activeWidth + "px"
-  // });
+  var resizeTimer;
 
-  // $(".tabs").on("click", "a", function(e) {
-  //   e.preventDefault();
-  //   $(".tabs a").removeClass("active");
-  //   $(this).addClass("active");
-  //   var activeWidth = $(this).innerWidth();
-  //   var itemPos = $(this).position();
-  //   $(".selector").css({
-  //     left: itemPos.left + "px",
-  //     width: activeWidth + "px"
-  //   });
-  // });
+  window.addEventListener("resize", function(e) {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      setWindowWidth(window.innerWidth);
+    }, 501);
+  });
 
   function logElement(navLocation) {
     const activeWidth = navLocation.current.offsetWidth;
@@ -41,7 +29,7 @@ const NavBar = props => {
   const nav4 = React.createRef();
 
   function navSliderLocation(navBarLocation) {
-    if (navBarLocation === "popular") {
+    if (navBarLocation === "trending") {
       return nav1;
     }
     if (navBarLocation === "upcoming") {
@@ -60,6 +48,11 @@ const NavBar = props => {
     console.log("IT WORKED!!");
   }, [navBarLocation]);
 
+  useEffect(() => {
+    logElement(navSliderLocation(navBarLocation));
+    console.log("WINDOW SIZE WORKED!");
+  }, [windowSize]);
+
   return (
     <div className="wrapper">
       <nav className="tabs">
@@ -68,14 +61,14 @@ const NavBar = props => {
           href="#"
           className="active"
           ref={nav1}
-          className={navBarLocation === "popular" ? "active" : null}
+          className={navBarLocation === "trending" ? "active" : null}
           onClick={e => {
             e.preventDefault();
-            setNavBarLocation("popular");
+            setNavBarLocation("trending");
             logElement(nav1);
           }}
         >
-          Popular
+          Trending
         </a>
         <a
           className={navBarLocation === "upcoming" ? "active" : null}
