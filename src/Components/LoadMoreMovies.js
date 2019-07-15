@@ -52,10 +52,6 @@ const LoadMoreMovies = props => {
     }
   }
 
-  // useEffect(() => {
-  //   getUpcomingMovies();
-  // }, []);
-
   if (pageNum <= totalPages) {
     return (
       <div className="load-more-movies-div">
