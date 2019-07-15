@@ -1,3 +1,4 @@
+require("dotenv").config();
 const admin = require("firebase-admin");
 const moment = require("moment");
 const cron = require("node-cron");
