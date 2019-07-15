@@ -34,14 +34,6 @@ const MovieGrid = props => {
 
   hideNavBar(false);
 
-  // function validate() {
-  //   if (document.getElementById("toggle-1").checked) {
-  //     console.log("The box is checked!");
-  //   } else {
-  //     console.log(`he check box isn't checked!`);
-  //   }
-  // }
-
   return (
     <div>
       {navBarLocation === "myMovies" &&
