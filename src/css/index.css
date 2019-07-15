@@ -345,7 +345,7 @@ body {
 
 .tabs {
   font-size: 15px;
-  padding: 0px;
+  padding-top: 1px;
   list-style: none;
   background: #ffffffba;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
@@ -362,7 +362,7 @@ body {
   display: inline-block;
   position: relative;
   z-index: 1;
-  transition-duration: 0.6s;
+  transition-duration: 0.5s;
 }
 
 .tabs a.active {
@@ -382,7 +382,7 @@ body {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
   z-index: 1;
   border-radius: 50px;
-  transition-duration: 0.6s;
+  transition-duration: 0.5s;
   transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
   background: #05abe0;
