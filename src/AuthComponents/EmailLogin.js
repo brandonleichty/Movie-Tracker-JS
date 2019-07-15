@@ -16,37 +16,6 @@ const EmailLogin = props => {
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      // .then(async userData => {
-      //   console.log(userData.user);
-
-      //   if (userData) {
-      //     const user = userData.user;
-
-      //     console.log("YO!");
-      //     const usersRef = firestore.collection("users").doc(`${user.uid}`);
-
-      //     await usersRef.get().then(userDoc => {
-      //       console.log("LALALALA");
-      //       console.log(userDoc);
-      //       if (userDoc.exists) {
-      //         console.log("💩");
-      //         console.log(userDoc.exists);
-      //         console.log(
-      //           `The user ${user.displayName} exist! uID: ${user.uid}`
-      //         );
-      //         firestore
-      //           .collection("users")
-      //           .doc(`${user.uid}`)
-      //           .update({
-      //             lastSignInTime: user.metadata.lastSignInTime
-      //           });
-
-      //         setUser(user);
-      //         console.log(userData);
-      //       }
-      //     });
-      //   }
-      // });
     } catch (error) {
       console.error(error);
     }
