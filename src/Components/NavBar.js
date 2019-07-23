@@ -69,7 +69,7 @@ const NavBar = props => {
     <div className="wrapper">
       <nav className="tabs">
         <div className="selector" />
-        <button
+        <a
           href="#"
           ref={nav1}
           className={navBarLocation === "trending" ? "active" : null}
@@ -80,8 +80,8 @@ const NavBar = props => {
           }}
         >
           Trending
-        </button>
-        <button
+        </a>
+        <a
           className={navBarLocation === "upcoming" ? "active" : null}
           ref={nav2}
           href="#"
@@ -93,8 +93,8 @@ const NavBar = props => {
           }}
         >
           Upcoming
-        </button>
-        <button
+        </a>
+        <a
           href="#"
           ref={nav3}
           onClick={e => {
@@ -106,8 +106,8 @@ const NavBar = props => {
           className={navBarLocation === "myMovies" ? "active" : null}
         >
           My Movies
-        </button>
-        <button
+        </a>
+        <a
           href="#"
           ref={nav4}
           className={navBarLocation === "search" ? "active" : null}
@@ -118,7 +118,7 @@ const NavBar = props => {
           }}
         >
           Search
-        </button>
+        </a>
       </nav>
     </div>
   );

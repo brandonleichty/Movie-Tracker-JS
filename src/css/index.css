@@ -355,7 +355,7 @@ body {
   font-family: Gilroy-SemiBold;
 }
 
-.tabs button {
+.tabs a {
   text-decoration: none;
   color: #85878b;
   padding: 10px 30px;
@@ -365,11 +365,11 @@ body {
   transition-duration: 0.5s;
 }
 
-.tabs button.active {
+.tabs a.active {
   color: #fff;
 }
 
-.tabs button i {
+.tabs a i {
   margin-right: 5px;
 }
 
@@ -399,7 +399,7 @@ body {
     font-size: 12px;
   }
 
-  .tabs button {
+  .tabs a {
     padding: 10px 12px;
   }
 
