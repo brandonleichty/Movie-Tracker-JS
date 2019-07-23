@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: "Gilroy-SemiBold";
-  src: url("webfonts/398F34_0_0.eot");
-  src: url("webfonts/398F34_0_0.eot?#iefix") format("embedded-opentype"),
-    url("webfonts/398F34_0_0.woff2") format("woff2"),
-    url("webfonts/398F34_0_0.woff") format("woff"),
-    url("webfonts/398F34_0_0.ttf") format("truetype");
+  src: url("./webfonts/398F34_0_0.eot");
+  src: url("./webfonts/398F34_0_0.eot?#iefix") format("embedded-opentype"),
+    url("./webfonts/398F34_0_0.woff2") format("woff2"),
+    url("./webfonts/398F34_0_0.woff") format("woff"),
+    url("./webfonts/398F34_0_0.ttf") format("truetype");
 }
 
 @font-face {
@@ -355,7 +355,7 @@ body {
   font-family: Gilroy-SemiBold;
 }
 
-.tabs a {
+.tabs button {
   text-decoration: none;
   color: #85878b;
   padding: 10px 30px;
@@ -365,16 +365,17 @@ body {
   transition-duration: 0.5s;
 }
 
-.tabs a.active {
+.tabs button.active {
   color: #fff;
 }
 
-.tabs a i {
+.tabs button i {
   margin-right: 5px;
 }
 
 .tabs .selector {
   height: 114%;
+  /* width: 120px; */
   display: inline-block;
   position: absolute;
   left: 0px;
@@ -393,12 +394,12 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05abe0', endColorstr='#8200f4',GradientType=1 );
 }
 
-@media (max-width: 605px) {
+@media (max-width: 613px) {
   .tabs {
     font-size: 12px;
   }
 
-  .tabs a {
+  .tabs button {
     padding: 10px 12px;
   }
 
@@ -406,6 +407,61 @@ body {
     height: 110%;
     top: -5%;
   }
+}
+
+/**
+  * Show the overflow in IE.
+  * 1. Show the overflow in Edge.
+  */
+
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+   * Remove the inheritance of text transform in Edge, Firefox, and IE.
+   * 1. Remove the inheritance of text transform in Firefox.
+   */
+
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+   * Correct the inability to style clickable types in iOS and Safari.
+   */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button:active {
+  outline: none;
+  border: none;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 /* END Nav Bar */
