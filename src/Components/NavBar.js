@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const NavBar = props => {
   const [active, setActive] = useState(false);
@@ -19,14 +19,26 @@ const NavBar = props => {
     const itemPosition = navLocation.current.offsetLeft;
 
     const selector = document.querySelector(".selector");
-    selector.style.left = itemPosition + "px";
-    selector.style.width = activeWidth + "px";
+
+    if (navBarLocation === "trending" && windowSize > 613) {
+      selector.style.left = itemPosition + "px";
+      selector.style.width = "120px";
+    } else if (navBarLocation === "trending" && windowSize < 613) {
+      selector.style.left = itemPosition + "px";
+      selector.style.width = "72px";
+    } else {
+      selector.style.left = itemPosition + "px";
+      selector.style.width = activeWidth + "px";
+    }
+
+    // console.log(`Selector left: ${navLocation.current.client}`);
+    console.log(`Selector width: ${navLocation.current.clientWidth}`);
   }
 
-  const nav1 = React.createRef();
-  const nav2 = React.createRef();
-  const nav3 = React.createRef();
-  const nav4 = React.createRef();
+  const nav1 = useRef(null);
+  const nav2 = useRef(null);
+  const nav3 = useRef(null);
+  const nav4 = useRef(null);
 
   function navSliderLocation(navBarLocation) {
     if (navBarLocation === "trending") {
@@ -46,20 +58,19 @@ const NavBar = props => {
   useEffect(() => {
     logElement(navSliderLocation(navBarLocation));
     console.log("IT WORKED!!");
-  }, [navBarLocation]);
+  }, [navBarLocation, windowSize]);
 
-  useEffect(() => {
-    logElement(navSliderLocation(navBarLocation));
-    console.log("WINDOW SIZE WORKED!");
-  }, [windowSize]);
+  // useEffect(() => {
+  //   logElement(navSliderLocation(navBarLocation));
+  //   console.log("WINDOW SIZE WORKED!");
+  // }, [windowSize]);
 
   return (
     <div className="wrapper">
       <nav className="tabs">
         <div className="selector" />
-        <a
+        <button
           href="#"
-          className="active"
           ref={nav1}
           className={navBarLocation === "trending" ? "active" : null}
           onClick={e => {
@@ -69,8 +80,8 @@ const NavBar = props => {
           }}
         >
           Trending
-        </a>
-        <a
+        </button>
+        <button
           className={navBarLocation === "upcoming" ? "active" : null}
           ref={nav2}
           href="#"
@@ -82,8 +93,8 @@ const NavBar = props => {
           }}
         >
           Upcoming
-        </a>
-        <a
+        </button>
+        <button
           href="#"
           ref={nav3}
           onClick={e => {
@@ -95,8 +106,8 @@ const NavBar = props => {
           className={navBarLocation === "myMovies" ? "active" : null}
         >
           My Movies
-        </a>
-        <a
+        </button>
+        <button
           href="#"
           ref={nav4}
           className={navBarLocation === "search" ? "active" : null}
@@ -107,7 +118,7 @@ const NavBar = props => {
           }}
         >
           Search
-        </a>
+        </button>
       </nav>
     </div>
   );
