@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 const NavBar = props => {
   const [active, setActive] = useState(false);
   const { setNavBarLocation, navBarLocation, pageNum, setPageNum } = props;
-  const [windowSize, setWindowWidth] = useState(null);
+  const [windowSize, setWindowWidth] = useState(window.innerWidth);
 
   var resizeTimer;
 
