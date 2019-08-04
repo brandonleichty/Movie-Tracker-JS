@@ -29,16 +29,12 @@ const Footer = props => {
             <Link to="/" onClick={signOut}>
               Log Out!
             </Link>
-            {" | "}
-            <Link to="/about">About</Link>
           </span>
         </div>
       ) : (
         <div>
           <span>
             <Link to="login">Login</Link>
-            {" | "}
-            <Link to="/about">About</Link>
           </span>
         </div>
       )}
