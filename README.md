@@ -18,7 +18,15 @@ Part of the project requirements were to use a minimum of *two APIs*. I decided 
 
 I'm a huge fan of movies and the overall movie theater experience. And I wanted to create something I was passionate about and had an interest in. I see a lot a movies in theaters, and realized that at the end of each year I have a hard time remembering which movies I've seen. 
 
-## The purpose of this site is to: 
+## Functionality
 
-A) Allow you to keep track of the movies you've seen.
-B) Send you SMS updates the day before movies you want to see are released in theaters. 
+Movie Tracker has two primary pieces of functionality (with more to come). It will:
+
+1. Allow you to keep track of the movies you've seen.
+2. Send you SMS updates the day before movies you want to see are released in theaters. 
+
+Here's an example of the *My Movies* section. Here you can see the movies you've seen, *and* the movies you want to see.
+You can also enable text notifications from this screen. 
+
+![Example of My Movies] (/README_Images/ExampleScreenshot.png "Screenshot of My Movies section")
+
