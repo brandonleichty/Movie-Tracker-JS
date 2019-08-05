@@ -4,7 +4,7 @@ Movie Tracker was designed as my final project for Threehouse's Full Stack JavaS
 
 This project uses a handful of technologoes, including but not limited to: 
 
-![Movie Tracker Tech Stack] (https://i.imgur.com/Ix7B6Lz.png)
+![Movie Tracker Tech Stack] (https://i.imgur.com/Ix7B6Lz.png "Movie Tracker Tech Stack")
 
 - React
 - Firebase
