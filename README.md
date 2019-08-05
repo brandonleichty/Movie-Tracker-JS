@@ -28,5 +28,5 @@ Movie Tracker has two primary pieces of functionality (with more to come). It wi
 Here's an example of the *My Movies* section. Here you can see the movies you've seen, *and* the movies you want to see.
 You can also enable text notifications from this screen. 
 
-![Example of My Movies] (/README_Images/ExampleScreenshot.png "Screenshot of My Movies section")
+![Example of My Movies](/README_Images/ExampleScreenshot.png "Screenshot of My Movies section")
 
