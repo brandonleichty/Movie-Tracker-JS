@@ -31,11 +31,11 @@ function useFetchMovies(
       }
 
       if (navBarLocation === "trending") {
-        return `https://api.themoviedb.org/3/movie/popular?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&media_type=movie&page=1&primary_release_year=2019&sort_by=popularity.desc&vote_count&region=US`;
+        return `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_OMDB_API_KEY}&language=en-US&media_type=movie&page=1&primary_release_year=2019&sort_by=popularity.desc&vote_count&region=US`;
       }
 
       if (navBarLocation === "search") {
-        return `https://api.themoviedb.org/3/search/movie?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&query=${query}&page=1&include_adult=false`;
+        return `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_OMDB_API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
       }
     };
 

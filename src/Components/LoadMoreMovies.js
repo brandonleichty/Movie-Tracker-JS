@@ -22,7 +22,7 @@ const LoadMoreMovies = props => {
 
       function endpointToFetch() {
         if (navBarLocation === "trending") {
-          return `https://api.themoviedb.org/3/movie/popular?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&media_type=movie&page=${pageNum}&primary_release_year=2019&sort_by=popularity.desc&vote_count`;
+          return `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_OMDB_API_KEY}&language=en-US&media_type=movie&page=${pageNum}&primary_release_year=2019&sort_by=popularity.desc&vote_count`;
         } else if (navBarLocation === "upcoming") {
           return `/api/upcoming/${pageNum}`;
         }
