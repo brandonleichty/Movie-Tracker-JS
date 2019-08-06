@@ -32,3 +32,23 @@ You can also enable text notifications from this screen.
 
 [Here's a LIVE DEMO](https://www.movietracker.dev)
 
+If you'd like to run this on your local machine, you'll need to get API/access keys for these services:
+
+-[TMDb](https://www.themoviedb.org/settings/api)
+-[Twilio](https://www.twilio.com/try-twilio)
+-[MongoDB](https://www.mongodb.com/cloud/atlas)
+-[Firestore](https://www.mongodb.com/cloud/atlas)
+
+After you've received keys for each of those services, place them in the ".env.example" file. 
+Once you're ready to go, remove ".example" from the file name so it's ".env"
+
+Run
+```
+npm install
+```
+and then
+```
+npm start
+```
+
+
