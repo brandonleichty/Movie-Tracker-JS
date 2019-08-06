@@ -2,7 +2,7 @@
 
 Movie Tracker was designed as my final project for Threehouse's Full Stack JavaScript [Techdegree](https://join.teamtreehouse.com/techdegree/ "Treehouse Techdegree"). 
 
-This project uses a handful of technologoes, including but not limited to: 
+This project uses a handful of technologies, including but not limited to: 
 
 ![Movie Tracker Tech Stack](/README_Images/TechStack.png)
 
@@ -10,7 +10,7 @@ This project uses a handful of technologoes, including but not limited to:
 - Firebase
 - Twilio
 - MongoDB
-- Express
+- Node/Express
 
 Part of the project requirements were to use a minimum of *two APIs*. I decided to use APIs from [Twilio](https://www.twilio.com) (for sms messaging), and The [Movie Database (TMBd)] (https://www.themoviedb.org).
 
