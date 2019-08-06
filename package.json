@@ -28,13 +28,14 @@
   },
   "proxy": "http://localhost:3001",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "run-p server start-frontend",
+    "start-frontend": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node-env-run server --exec nodemon | pino-colada",
     "server2": "node server/index.js",
-    "dev": "run-p server start"
+    "dev": "run-p server start-frontend"
   },
   "eslintConfig": {
     "extends": "react-app"
