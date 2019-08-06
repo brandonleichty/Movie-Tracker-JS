@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import uniqBy from "lodash.uniqby";
 
+import dotenv from 'dotenv'
+dotenv.config()
+
 const LoadMoreMovies = props => {
   // const [pageNum, setPageNum] = useState(2);
   const [loading, setLoading] = useState(false);

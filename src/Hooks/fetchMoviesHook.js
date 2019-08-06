@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
+import dotenv from 'dotenv'
+dotenv.config()
+
 // Takes in a movie prop (that's an object) and iterates over it. While filtering out adult movies.
 
 function useFetchMovies(
