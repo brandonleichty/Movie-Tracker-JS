@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
-import dotenv from 'dotenv'
-dotenv.config()
-
 // Takes in a movie prop (that's an object) and iterates over it. While filtering out adult movies.
 
 function useFetchMovies(
@@ -15,7 +12,6 @@ function useFetchMovies(
 ) {
   const [movieData, setMovieData] = useState([]);
   const [loading, setLoading] = useState(false);
-
 
   const fetchMovieData = async () => {
     // Need to clean up this code and figure out if there's a better way to handle the logic. Here's what it's currently doing:
@@ -29,18 +25,17 @@ function useFetchMovies(
 
       if (navBarLocation === "upcoming") {
         return `/api/upcoming`;
+        // return `https://api.themoviedb.org/3/discover/movie?api_key=d951026be8c262501cf4a37f22f82184&page=1&language=en-US&primary_release_date.gte=${date.format(
+        //   "YYYY-MM-DD"
+        // )}&sort_by=primary_release_date.asc&with_release_type=3&include_video=false&region=US`;
       }
 
       if (navBarLocation === "trending") {
-        return `https://api.themoviedb.org/3/movie/popular?api_key=${
-          process.env.REACT_APP_OMDB_API_KEY
-        }&language=en-US&media_type=movie&page=1&primary_release_year=2019&sort_by=popularity.desc&vote_count&region=US`;
+        return `https://api.themoviedb.org/3/movie/popular?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&media_type=movie&page=1&primary_release_year=2019&sort_by=popularity.desc&vote_count&region=US`;
       }
 
       if (navBarLocation === "search") {
-        return `https://api.themoviedb.org/3/search/movie?api_key=${
-          process.env.REACT_APP_OMDB_API_KEY
-        }&language=en-US&query=${query}&page=1&include_adult=false`;
+        return `https://api.themoviedb.org/3/search/movie?api_key=d951026be8c262501cf4a37f22f82184&language=en-US&query=${query}&page=1&include_adult=false`;
       }
     };
 

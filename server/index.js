@@ -66,7 +66,7 @@ async function getUpcomingMovies() {
   const SEVEN_MONTHS_FROM_CURRENT_DATE = moment().add(7, "months");
 
   const endPoint = `https://api.themoviedb.org/3/discover/movie?api_key=${
-    process.env.REACT_APP_OMDB_API_KEY
+    process.env.OMDB_API_KEY
   }&page=1&language=en-US&primary_release_date.gte=${CURRENT_DATE.format(
     "YYYY-MM-DD"
   )}&primary_release_date.lte=${SEVEN_MONTHS_FROM_CURRENT_DATE.format(
@@ -86,7 +86,7 @@ async function getUpcomingMovies() {
     for (let i = 1; i <= totalPages; i++) {
       const res = await fetch(
         `https://api.themoviedb.org/3/discover/movie?api_key=${
-          process.env.REACT_APP_OMDB_API_KEY
+          process.env.OMDB_API_KEY
         }&page=1&language=en-US&primary_release_date.gte=${CURRENT_DATE.format(
           "YYYY-MM-DD"
         )}&primary_release_date.lte=${SEVEN_MONTHS_FROM_CURRENT_DATE.format(
