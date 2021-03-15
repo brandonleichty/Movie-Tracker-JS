@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
 // Takes in a movie prop (that's an object) and iterates over it. While filtering out adult movies.
 
@@ -23,7 +23,7 @@ function useFetchMovies(
     // 3. If the query argument does NOT equals an empty string, try and fetch any data from the API. Also fetch the data if the
     //    typeOfMovie is equal to "popular" or "upcoming"
 
-    const movieDatabaseEndpoint = navBarLocation => {
+    const movieDatabaseEndpoint = (navBarLocation) => {
       const date = moment();
 
       if (navBarLocation === "upcoming") {
@@ -34,7 +34,7 @@ function useFetchMovies(
       }
 
       if (navBarLocation === "trending") {
-        return `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_OMDB_API_KEY}&language=en-US&media_type=movie&page=1&primary_release_year=2019&sort_by=popularity.desc&vote_count&region=US`;
+        return `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_OMDB_API_KEY}`;
       }
 
       if (navBarLocation === "search") {
