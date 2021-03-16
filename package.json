@@ -2,6 +2,9 @@
   "name": "movie-tracker-js",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "15.x"
+  },
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.1",
     "body-parser": "^1.19.0",
