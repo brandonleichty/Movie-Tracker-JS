@@ -48,7 +48,7 @@ const EmailLogin = props => {
               onChange={e => setPassword(e.target.value)}
             />
           </div>
-          <input type="submit" value="Sign Up" />
+          <input type="submit" value="Login" />
         </form>
       </div>
       <div className="existing-account-signin">
